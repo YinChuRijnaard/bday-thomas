@@ -1,10 +1,12 @@
-import Head from "next/head";
-import Image from "next/image";
+import { useEffect, useState } from "react";
+
+import { useCheckBirthday } from "../hooks/useCheckBirthday";
+
+import HomeFriends from "../components/HomeFriends";
+import HomeThomas from "../components/HomeThomas";
 
 export default function Home() {
-  return (
-    <div>
-      <h1 className="text-6xl text-red-400">Hello world.</h1>
-    </div>
-  );
+  const isHisBirthday = useCheckBirthday();
+
+  return <>{isHisBirthday ? <HomeThomas /> : <HomeFriends />}</>;
 }
