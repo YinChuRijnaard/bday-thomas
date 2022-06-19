@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import toast from "react-hot-toast";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { Button, Heading, Text, Textarea } from "@chakra-ui/react";
 
 import { AuthState } from "../AuthContext";
@@ -34,6 +34,8 @@ const WriteMessage = () => {
     addDoc(colRef, {
       author: user.displayName,
       message: message,
+      createdAt: serverTimestamp(),
+      published: true,
     });
 
     setMessage("");
