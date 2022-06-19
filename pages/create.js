@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { addDoc, collection } from "firebase/firestore";
@@ -12,7 +12,18 @@ const WriteMessage = () => {
   const [disabled, setDisabled] = useState(false);
   const { user } = AuthState();
 
-  // console.log(user);
+  useEffect(() => {
+    const data = window.localStorage.getItem("HAS_PUBLISHED_MESSAGE");
+
+    if (data !== null) setDisabled(JSON.parse(data));
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem(
+      "HAS_PUBLISHED_MESSAGE",
+      JSON.stringify(disabled)
+    );
+  }, [disabled]);
 
   const handleChange = (e) => {
     let writtenMessage = e.target.value;
