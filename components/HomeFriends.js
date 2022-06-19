@@ -5,7 +5,8 @@ const HomeFriends = () => {
     <main className="flex h-screen w-screen flex-col justify-center bg-[url('/bg.jpeg')] bg-cover bg-center bg-no-repeat text-white lg:bg-top">
       <div className="bg-gray-500/50 p-4 text-center lg:mx-48">
         <Heading size="2xl">
-          Schrijf een leuk bericht voor Thomas z'n 26<sup>e</sup> verjaardag! 🥳
+          Schrijf een leuk bericht voor Thomas z&apos;n 26<sup>e</sup>{" "}
+          verjaardag! 🥳
         </Heading>
 
         <div className="p-4"></div>
@@ -13,10 +14,10 @@ const HomeFriends = () => {
         <div className="p-4"></div>
 
         <Text>
-          Het is bijna Thomas z'n verjaardag! 🎉 Daarom leek het mij, Yin Chu,
-          een leuk idee om een kleine app te maken waar vrienden en familie een
-          berichtje achter kunnen laten. Lijkt je dat leuk? Log dan snel in met
-          je Google account! 😊
+          Het is bijna Thomas z&apos;n verjaardag! 🎉 Daarom leek het mij, Yin
+          Chu, een leuk idee om een kleine app te maken waar vrienden en familie
+          een berichtje achter kunnen laten. Lijkt je dat leuk? Log dan snel in
+          met je Google account! 😊
         </Text>
       </div>
 
