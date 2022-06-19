@@ -5,13 +5,10 @@ import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
 import { Button, Heading, Text } from "@chakra-ui/react";
 
-import { useCheckBirthday } from "../hooks/useCheckBirthday";
-
 const HomeFriends = () => {
   const router = useRouter();
   const auth = getAuth();
-  const provider = new GoogleAuthProvider();
-  const isHisBirthday = useCheckBirthday();
+  // const provider = new GoogleAuthProvider(); // No longer necessary
   const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
 
   useEffect(() => {
