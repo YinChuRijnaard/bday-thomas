@@ -1,8 +1,9 @@
 import { useState } from "react";
 import Link from "next/link";
+import { addDoc, collection } from "firebase/firestore";
 import { Button, Heading, Text, Textarea } from "@chakra-ui/react";
-
 import { AuthState } from "../AuthContext";
+import { db, colRef } from "../firebase";
 
 const WriteMessage = () => {
   const [message, setMessage] = useState("");
@@ -13,6 +14,20 @@ const WriteMessage = () => {
   const handleChange = (e) => {
     let writtenMessage = e.target.value;
     setMessage(writtenMessage);
+  };
+
+  const handleClick = () => {
+    console.log(message);
+
+    // addDoc(collection(colRef, "bday-messages"), {
+    //   author: user.displayName,
+    //   message: message,
+    // });
+
+    addDoc(colRef, {
+      author: user.displayName,
+      message: message,
+    });
   };
 
   return (
@@ -39,7 +54,9 @@ const WriteMessage = () => {
           <div className="p-4"></div>
 
           <div className="flex justify-center">
-            <Button colorScheme="blue">Plaats je bericht</Button>
+            <Button colorScheme="blue" onClick={handleClick}>
+              Plaats je bericht
+            </Button>
           </div>
         </main>
       ) : (
