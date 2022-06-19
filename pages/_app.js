@@ -1,12 +1,18 @@
 import { ChakraProvider } from "@chakra-ui/react";
+import toast, { Toaster } from "react-hot-toast";
+
+import AuthContext from "../AuthContext";
 
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ChakraProvider>
-      <Component {...pageProps} />
-    </ChakraProvider>
+    <AuthContext>
+      <ChakraProvider>
+        <Component {...pageProps} />
+        <Toaster />
+      </ChakraProvider>
+    </AuthContext>
   );
 }
 

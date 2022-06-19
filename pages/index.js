@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 import { useCheckBirthday } from "../hooks/useCheckBirthday";
 
 import HomeFriends from "../components/HomeFriends";

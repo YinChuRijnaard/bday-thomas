@@ -1,18 +1,33 @@
 import { useRouter } from "next/router";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import toast from "react-hot-toast";
 import { Button, Heading, Text } from "@chakra-ui/react";
 
 import { useCheckBirthday } from "../hooks/useCheckBirthday";
 
 const HomeFriends = () => {
   const router = useRouter();
+  const auth = getAuth();
+  const provider = new GoogleAuthProvider();
   const isHisBirthday = useCheckBirthday();
 
   const handleClick = () => {
-    if (!isHisBirthday) {
-      router.push("/create");
-    }
-
-    return;
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        // @ts-ignore
+        const token = credential.accessToken;
+        const user = result.user;
+        router.push("/create");
+        toast.success("Je bent ingelogd!");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.customData.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        toast.error(error);
+      });
   };
 
   return (
