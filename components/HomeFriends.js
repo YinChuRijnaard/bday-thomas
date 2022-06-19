@@ -1,6 +1,20 @@
+import { useRouter } from "next/router";
 import { Button, Heading, Text } from "@chakra-ui/react";
 
+import { useCheckBirthday } from "../hooks/useCheckBirthday";
+
 const HomeFriends = () => {
+  const router = useRouter();
+  const isHisBirthday = useCheckBirthday();
+
+  const handleClick = () => {
+    if (!isHisBirthday) {
+      router.push("/create");
+    }
+
+    return;
+  };
+
   return (
     <main className="flex h-screen w-screen flex-col justify-center bg-[url('/bg.jpeg')] bg-cover bg-center bg-no-repeat text-white lg:bg-top">
       <div className="bg-gray-500/50 p-4 text-center lg:mx-48">
@@ -24,7 +38,9 @@ const HomeFriends = () => {
       <div className="p-4"></div>
 
       <div className="flex justify-center">
-        <Button colorScheme="blue">Log in en schrijf je bericht 🖊️</Button>
+        <Button colorScheme="blue" onClick={handleClick}>
+          Log in en schrijf je bericht 🖊️
+        </Button>
       </div>
     </main>
   );
