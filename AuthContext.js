@@ -12,7 +12,7 @@ import {
 const Auth = createContext();
 
 const AuthContext = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
 
   const init = () => {
