@@ -5,6 +5,6 @@
 @layer base {
   html,
   body {
-    @apply overflow-x-hidden;
+    @apply overflow-x-hidden text-black;
   }
 }
