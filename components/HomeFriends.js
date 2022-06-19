@@ -1,8 +1,5 @@
 import { Button, Heading, Text } from "@chakra-ui/react";
 
-// @ts-ignore
-// import styles from "../styles/HomeFriends.module.css";
-
 const HomeFriends = () => {
   return (
     <main className="flex h-screen w-screen flex-col justify-center bg-[url('/bg.jpeg')] bg-cover bg-center bg-no-repeat text-white lg:bg-top">
