@@ -1,5 +1,7 @@
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
 import { Button, Heading, Text } from "@chakra-ui/react";
 
@@ -10,25 +12,33 @@ const HomeFriends = () => {
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
   const isHisBirthday = useCheckBirthday();
+  const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
 
-  const handleClick = () => {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        // @ts-ignore
-        const token = credential.accessToken;
-        const user = result.user;
-        router.push("/create");
-        toast.success("Je bent ingelogd!");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        const email = error.customData.email;
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        toast.error(error);
-      });
-  };
+  useEffect(() => {
+    if (user) {
+      router.push("/create");
+      toast.success("Je bent ingelogd!");
+    } else if (error) {
+      toast.error(error.message);
+    }
+  }, [user]);
+
+  // signInWithPopup(auth, provider)
+  //   .then((result) => {
+  //     const credential = GoogleAuthProvider.credentialFromResult(result);
+  //     // @ts-ignore
+  //     const token = credential.accessToken;
+  //     const user = result.user;
+  //     router.push("/create");
+  //     toast.success("Je bent ingelogd!");
+  //   })
+  //   .catch((error) => {
+  //     const errorCode = error.code;
+  //     const errorMessage = error.message;
+  //     const email = error.customData.email;
+  //     const credential = GoogleAuthProvider.credentialFromError(error);
+  //     toast.error(error);
+  //   });
 
   return (
     <main className="flex h-screen w-screen flex-col justify-center bg-[url('/bg.jpeg')] bg-cover bg-center bg-no-repeat text-white lg:bg-top">
@@ -53,7 +63,7 @@ const HomeFriends = () => {
       <div className="p-4"></div>
 
       <div className="flex justify-center">
-        <Button colorScheme="blue" onClick={handleClick}>
+        <Button colorScheme="blue" onClick={() => signInWithGoogle()}>
           Log in en schrijf je bericht 🖊️
         </Button>
       </div>
