@@ -6,9 +6,9 @@ import HomeThomas from "../components/HomeThomas";
 export default function Home() {
   const isHisBirthday = useCheckBirthday();
 
+  // @ts-ignore
   return <>{!isHisBirthday ? <HomeThomas /> : <HomeFriends />}</>;
 }
 
 // Organise imports
 // Clean up code where possible
-// Clean up firebase.js
