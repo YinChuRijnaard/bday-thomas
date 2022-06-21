@@ -21,19 +21,19 @@ const WriteMessage = () => {
   }, []);
 
   useEffect(() => {
+    window.localStorage.setItem(
+      "HAS_PUBLISHED_MESSAGE",
+      JSON.stringify(disabledForm)
+    );
+  }, [disabledForm]);
+
+  useEffect(() => {
     if (message.length > 10) {
       setDisabledButton(false);
     } else {
       setDisabledButton(true);
     }
   }, [message]);
-
-  useEffect(() => {
-    window.localStorage.setItem(
-      "HAS_PUBLISHED_MESSAGE",
-      JSON.stringify(disabledButton)
-    );
-  }, [disabledButton]);
 
   const handleChange = (e) => {
     let writtenMessage = e.target.value;
