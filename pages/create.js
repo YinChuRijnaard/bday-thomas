@@ -15,17 +15,22 @@ const WriteMessage = () => {
   const { user } = AuthState();
 
   useEffect(() => {
-    const data = window.localStorage.getItem("HAS_PUBLISHED_MESSAGE");
+    const disabledFormLS = window.localStorage.getItem("DISABLED_FORM");
+    const disabledButtonLS = window.localStorage.getItem("DISABLED_BUTTON");
 
-    if (data !== null) setDisabledButton(JSON.parse(data));
+    if (disabledFormLS !== null) setDisabledForm(JSON.parse(disabledFormLS));
+    if (disabledButtonLS !== null)
+      setDisabledButton(JSON.parse(disabledButtonLS));
   }, []);
 
   useEffect(() => {
+    window.localStorage.setItem("DISABLED_FORM", JSON.stringify(disabledForm));
+
     window.localStorage.setItem(
-      "HAS_PUBLISHED_MESSAGE",
-      JSON.stringify(disabledForm)
+      "DISABLED_BUTTON",
+      JSON.stringify(disabledButton)
     );
-  }, [disabledForm]);
+  }, [disabledForm, disabledButton]);
 
   useEffect(() => {
     if (message.length > 10) {
