@@ -9,21 +9,31 @@ import { db, colRef } from "../firebase";
 
 const WriteMessage = () => {
   const [message, setMessage] = useState("");
-  const [disabled, setDisabled] = useState(false);
+  const [disabledForm, setDisabledForm] = useState(false);
+  const [disabledButton, setDisabledButton] = useState(true);
+  const [published, setPublished] = useState(false);
   const { user } = AuthState();
 
   useEffect(() => {
     const data = window.localStorage.getItem("HAS_PUBLISHED_MESSAGE");
 
-    if (data !== null) setDisabled(JSON.parse(data));
+    if (data !== null) setDisabledButton(JSON.parse(data));
   }, []);
+
+  useEffect(() => {
+    if (message.length > 10) {
+      setDisabledButton(false);
+    } else {
+      setDisabledButton(true);
+    }
+  }, [message]);
 
   useEffect(() => {
     window.localStorage.setItem(
       "HAS_PUBLISHED_MESSAGE",
-      JSON.stringify(disabled)
+      JSON.stringify(disabledButton)
     );
-  }, [disabled]);
+  }, [disabledButton]);
 
   const handleChange = (e) => {
     let writtenMessage = e.target.value;
@@ -39,7 +49,9 @@ const WriteMessage = () => {
     });
 
     setMessage("");
-    setDisabled(!disabled);
+    setDisabledForm(true);
+    setDisabledButton(true);
+    setPublished(true);
     toast.success("Bericht geplaatst!");
   };
 
@@ -51,6 +63,13 @@ const WriteMessage = () => {
 
           <div className="p-4 text-center lg:mx-96">
             <Heading>Hey, {user.displayName}! 👋</Heading>
+
+            <div className="p-4"></div>
+            {!published && (
+              <Text as="i" fontSize="xs">
+                Let op: je kunt maar één bericht achterlaten!
+              </Text>
+            )}
           </div>
 
           <div className="p-4"></div>
@@ -61,7 +80,7 @@ const WriteMessage = () => {
               onChange={handleChange}
               placeholder="Schrijf je bericht..."
               focusBorderColor="black"
-              disabled={disabled}
+              disabled={disabledForm}
             />
           </div>
 
@@ -71,16 +90,19 @@ const WriteMessage = () => {
             <Button
               colorScheme="gray"
               onClick={handleClick}
-              disabled={disabled}
+              disabled={disabledButton}
             >
               Plaatsen
             </Button>
+
+            {/* <div className="p-4"></div> */}
+
             {/* <Button colorScheme="gray">Bewerken</Button> */}
           </div>
 
           <div className="p-4"></div>
 
-          {disabled && (
+          {disabledForm && disabledButton && (
             <div className="p-4 text-center lg:mx-96">
               <Text>
                 <strong>Bedankt!</strong> <br /> Je bericht is geplaatst. Bezoek
