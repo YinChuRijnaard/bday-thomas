@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import { Button, Heading, Link, Text } from "@chakra-ui/react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 
-import Google from "../icons/Google";
+import Google from "./icons/Google";
 
 const HomeFriends = () => {
   const router = useRouter();
