@@ -22,7 +22,7 @@ const HomeThomas = () => {
 
   const messagesMapped = messages?.map((item, id) => {
     return (
-      <div className="my-4 mx-4 bg-white/90 p-4 lg:mx-96" key={id}>
+      <div className="my-4 mx-4 bg-white/75 p-4 lg:mx-96" key={id}>
         <Heading>
           {
             // @ts-ignore
@@ -41,8 +41,9 @@ const HomeThomas = () => {
   });
 
   return (
-    <main className="flex h-screen w-screen flex-col justify-center bg-[url('/bgThomasPortrait.png')] bg-cover bg-center bg-no-repeat lg:bg-[url('/bgThomasLandscape.png')] lg:bg-top">
-      <div className="bg-gray-500/90 p-4 text-center text-white lg:mx-96">
+    <main className="flex h-full w-screen flex-col justify-center bg-[url('/bgThomasPortrait.png')] bg-cover bg-center bg-no-repeat lg:bg-[url('/bgThomasLandscape.png')] lg:bg-top">
+      <div className="p-4"></div>
+      <div className="bg-gray-500/75 p-4 text-center text-white lg:mx-96">
         <Heading>Gefeliciteerd Thomas! 🤩</Heading>
 
         <div className="p-4"></div>
